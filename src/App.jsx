@@ -25,7 +25,7 @@ function App() {
   }
 
   return (
-    <main className='flex flex-col gap-8 border p-8 rounded-lg border-gray-300 flex-wrap print:border-none'>
+    <main className='flex flex-col gap-8 border p-8 rounded-lg border-gray-300 flex-wrap print:border-none print:h-auto'>
       <h1 className='text-3xl font-bold text-center print:hidden'>Preparar pedido</h1>
       <section className='flex gap-4 flex-wrap '>
     {conectado ? 
@@ -43,7 +43,7 @@ function App() {
     </div>    
   }
 
-    <div data-color-mode="light" className='w-full lg:w-[400px] lg:h-[400px] border p-8 flex flex-col justify-between rounded-lg border-gray-300 gap-4 print:border-none'>
+    <div data-color-mode="light" className='w-full lg:w-[400px] lg:h-[400px] border p-8 flex flex-col justify-between rounded-lg border-gray-300 gap-4 print:border-none print:h-auto'>
         <MarkdownPreview style={{backgroundColor: '#f8f8ff'}} source={resposta} />
        { resposta && <Button className='print:hidden' onClick={() => {
         window.print()
