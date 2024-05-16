@@ -8,7 +8,7 @@ function App() {
   const [mensagem, setMensagem] = useState("");
   const [resposta, setResposta] = useState([]);
   const [key, setKey] = useState(localStorage.getItem("key"));
-  const [conectado, setConectado] = (localStorage.getItem("conectado") == null) ? useState(false) : useState(true);
+  const [conectado, setConectado] = (false);
   const [tema, setTema] = useState("");
   const [botaoIniciar, setBotaoIniciar] = useState(true);
   
@@ -27,7 +27,7 @@ function App() {
 
   async function handleKey() {
     if(key.length == 39){
-      localStorage.setItem("conectado", true);
+      setConectado(true);
     }
     else{
       alert("Chave inválida")
