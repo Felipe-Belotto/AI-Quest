@@ -1,18 +1,38 @@
 import { Button } from '@material-tailwind/react'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Alternativa from './Alternativa'
 import AlternativaRevisao from './AlternativaRevisao';
 import { ProvaContext } from '../context/ProvaContext';
+import transformaNumero from '../functions/auxiliares';
 
 export default function Prova(props) {
   const [step, setStep] = useState(0);
-  const {pontuacao} = useContext(ProvaContext);
+  const {pontuacao, respostasSelecionadas, setPontuacao,setRespostasCorretas, respostasCorretas } = useContext(ProvaContext);
 
-  function validarRespostas(){
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  setStep(step + 1);
+  function validarRespostas() {
+    const respostas = Object.values(respostasSelecionadas);
+  
+    for (let i = 0; i < 10; i++) {
+      const item = props.lista[i];
+  
+      const respostaCorretaIndex = item.alternativas.findIndex((alternativa) => alternativa === item.resposta);
+  
+      if (respostaCorretaIndex !== -1 && transformaNumero(respostaCorretaIndex) === respostas[i]) {
+        setRespostasCorretas((prev) => ({
+          ...prev,
+          [i + 1]: transformaNumero(respostaCorretaIndex)
+        }));
+      }
+    }
+    setStep(step + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
+ 
+  useEffect(() => { 
+    const acertos = Object.keys(respostasCorretas).length; ;
+    setPontuacao(acertos);
+    
+  }, [respostasCorretas]);
   
 
   return (
@@ -34,7 +54,7 @@ export default function Prova(props) {
         <Alternativa 
           texto={alternativa} 
           index={altIndex}  
-          pergunta={index + 1} 
+          pergunta={index} 
           selecionada={false} 
         />
       ))}
@@ -66,7 +86,7 @@ export default function Prova(props) {
             <AlternativaRevisao
               texto={alternativa} 
               index={altIndex}  
-              pergunta={index + 1}  
+              pergunta={index}  
               alternativaCorreta={item.resposta}
             />
           ))}

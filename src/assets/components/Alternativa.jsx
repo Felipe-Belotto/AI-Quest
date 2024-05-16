@@ -10,11 +10,11 @@ export default function Alternativa(props) {
 
   function entregarAlternativa(perguntaIndex, respostaSelecionada) {
    const selecionadas = respostasSelecionadas;
-   setRespostasSelecionadas({ ...selecionadas, [perguntaIndex]: transformaNumero(respostaSelecionada) });
+   setRespostasSelecionadas({ ...selecionadas, [perguntaIndex + 1]: transformaNumero(respostaSelecionada) });
   }
 
   function verificaAlternativa() {
-    const valorAtual = respostasSelecionadas[props.pergunta]; 
+    const valorAtual = respostasSelecionadas[props.pergunta + 1]; 
     const alternativaAtual = transformaNumero(props.index);
   
     if (valorAtual === alternativaAtual) {

@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 export default async function conectaAPI(msg, key) {
 
   const genAI = new GoogleGenerativeAI(key);
-  /* const model = genAI.getGenerativeModel({ model: "gemini-pro" }); */
+/*   const model = genAI.getGenerativeModel({ model: "gemini-pro" }); */
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
 
   const chat = model.startChat({
@@ -18,7 +18,7 @@ export default async function conectaAPI(msg, key) {
   for (let i = 0; i < maxRetries; i++) {
     try {
       const result = await chat.sendMessage(`Crie 10 perguntas de múltipla escolha sobre ${msg} com 5 alternativas cada. Cada pergunta deve ter apenas uma resposta correta. Retorne o resultado em formato JSON mas tenha consciencia que o resultado da sua resposta passara pela função JSON.parse então envie de acordo com os requisitos necessarios para ela nao dar erro, não retorne em codeblock, não irei visualizar, mande somente [{},] o array e os objetos que compõem o JSON
-      ,Certifique-se que alternativas: será sempre um array e nunca uma string e que as alternativas não estão dentro de arrays adicionais, o que tornara a estrutura inválida. O JSON espera que as alternativas sejam um array direto, não um array de arrays. Resposta nunca será uma string vazia. Se atente para nunca faltar aspas necessárias para manter a aplicação estavel.Caso seja perguntado de Star Wars, não de o exemplo abaixo sempre tente ser criativo. Você vai retornar como nesse exemplo:[
+      ,Certifique-se que alternativas: será sempre um array e nunca uma string e que as alternativas não estão dentro de arrays adicionais, o que tornara a estrutura inválida. O JSON espera que as alternativas sejam um array direto, não um array de arrays. Resposta nunca será uma string vazia. Se atente para nunca faltar aspas necessárias para manter a aplicação estavel.Caso seja perguntado de Star Wars, não de o exemplo abaixo sempre tente ser criativo. Cuidado com SyntaxError pois irei usar o seu retorno para transformar em json.parse() .Você vai retornar como nesse exemplo:[
         {
           "enunciado": "Qual é o nome do planeta natal de Luke Skywalker?",
           "alternativas": ["Tatooine", "Alderaan", "Naboo", "Coruscant", "Endor"],
@@ -74,14 +74,17 @@ export default async function conectaAPI(msg, key) {
       const text = await response.text();
       const cleanedText = text.trim(); 
       const json = JSON.parse(cleanedText);
-      console.log(json)
       return json;
     } catch (error) {
       console.error("Erro ao analisar JSON:", error);
       // Se o erro for do tipo SyntaxError, significa que o JSON está inválido.
       if (error instanceof SyntaxError && i < maxRetries - 1) {
         console.log("Tentando novamente...");
-        continue;
+      const response = await result.response;
+      const text = await response.text();
+      const cleanedText = text.trim(); 
+      const json = JSON.parse(cleanedText);
+      return json;
       } else {
         // Caso contrário, retorna o erro para que você possa tratar.
         throw error; 
