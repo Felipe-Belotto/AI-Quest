@@ -8,7 +8,7 @@ function App() {
   const [mensagem, setMensagem] = useState("");
   const [resposta, setResposta] = useState([]);
   const [key, setKey] = useState(localStorage.getItem("key"));
-  const [conectado, setConectado] = (false);
+  const [conectado, setConectado] = useState(false);
   const [tema, setTema] = useState("");
   const [botaoIniciar, setBotaoIniciar] = useState(true);
   
