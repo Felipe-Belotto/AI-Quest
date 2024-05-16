@@ -1,24 +1,34 @@
 import { Button } from '@material-tailwind/react';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ProvaContext } from '../context/ProvaContext';
 import transformaNumero from '../functions/auxiliares';
 
 export default function AlternativaRevisao(props) {
-  const { respostasSelecionadas } = useContext(ProvaContext);
+  const { respostasSelecionadas, pontuacao, setPontuacao } = useContext(ProvaContext);
+  const [pontuacaoAtualizada, setPontuacaoAtualizada] = useState(false); 
 
   const alternativaLetra = transformaNumero(props.index);
 
   function verificaAlternativa() {
-    const respostaSelecionada = respostasSelecionadas[props.pergunta]; // Verifica a resposta selecionada
-    const alternativaAtual = transformaNumero(props.index); // Obtém a letra da alternativa atual
+    const respostaSelecionada = respostasSelecionadas[props.pergunta];
+    const alternativaAtual = transformaNumero(props.index);
 
-    // Compara a letra da resposta selecionada com a letra da alternativa correta
     if (respostaSelecionada === alternativaAtual) {
+      if (props.texto === props.alternativaCorreta && !pontuacaoAtualizada) { 
+        const pontuacaoAtual = pontuacao;
+        setPontuacao(pontuacaoAtual + 1);
+        console.log(pontuacao)
+        setPontuacaoAtualizada(true);
+      }
       return true;
     } else {
       return false;
     }
   }
+
+  useEffect(() => {
+    setPontuacaoAtualizada(false); 
+  }, [props.pergunta]);
 
   const verifica = verificaAlternativa();
 
@@ -28,6 +38,7 @@ export default function AlternativaRevisao(props) {
     <>
       {verifica ? (
         props.texto === alternativaCorretaTexto ? (
+          /* Botão caso seja a alternativa correta */
           <Button
           className={"border text-[#ffffff] bg-[#1aa426] flex gap-8 items-center"}
           key={props.index}
@@ -37,7 +48,9 @@ export default function AlternativaRevisao(props) {
           </div>
           {props.texto}
         </Button>
-        ):(
+        ):
+        /* Botão caso seja a alternativa incorreta */
+        (
           <Button
           className={"border text-[#ffffff] bg-[#ff5e5e] flex gap-8 items-center"}
           key={props.index}
@@ -49,7 +62,9 @@ export default function AlternativaRevisao(props) {
         </Button>
         )
        
-      ) : (
+      ) : 
+      /* Botão caso não seja a alternativa selecionada */
+      (
         <Button
           className={"border text-[#555555] bg-[#ffffff] flex gap-8 items-center"}
           key={props.index}
