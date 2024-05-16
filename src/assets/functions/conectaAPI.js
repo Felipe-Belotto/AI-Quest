@@ -3,7 +3,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 export default async function conectaAPI(msg, key) {
 
   const genAI = new GoogleGenerativeAI(key);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  /* const model = genAI.getGenerativeModel({ model: "gemini-pro" }); */
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
 
   const chat = model.startChat({
     generationConfig: {
@@ -78,7 +79,6 @@ export default async function conectaAPI(msg, key) {
     } catch (error) {
       console.error("Erro ao analisar JSON:", error);
       // Se o erro for do tipo SyntaxError, significa que o JSON está inválido.
-      // Tenta novamente.
       if (error instanceof SyntaxError && i < maxRetries - 1) {
         console.log("Tentando novamente...");
         continue;

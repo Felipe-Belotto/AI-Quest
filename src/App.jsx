@@ -54,7 +54,7 @@ function App() {
     :
     <div className='w-full lg:w-[400px] lg:h-[400px] border p-4 lg:p-8 flex flex-col justify-between rounded-lg border-gray-300 gap-4 print:hidden'>
     <div className='flex flex-col gap-1'>
-    <Input className='text-xs'maxLength={39} label='Informe sua chave' value={key} onChange={(e) => localStorage.setItem("key", e.target.value)}  />
+    <Input className='text-xs'maxLength={39} label='Informe sua chavez' value={key} onChange={(e) => localStorage.setItem("key", e.target.value)}  />
     <p className='text-xs text-gray-700'> Utilize a chave gerada pelo Google AI Studio</p>
     </div>
     <Button color='green' onClick={() => {handleKey()}}>Conectar</Button>
