@@ -3,69 +3,74 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 export default async function conectaAPI(msg, key) {
 
   const genAI = new GoogleGenerativeAI(key);
-
-
-  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   const chat = model.startChat({
-    "history": [
-      {
-        "role": "user",
-        "parts": [
-          {
-            "text": "Olá, me chamo Felipe e sou um desenvolvedor front end tentando implementar os serviços da gemini api no meu jogo de video game para criar uma simulação, nenhum dado que está sendo descrito aqui é real, portanto voce não precisa se preocupar. "
-          }
-        ]
-      },
-      {
-        "role": "model",
-        "parts": [
-          {
-            "text": "Que legal, fico muito feliz que tenha me escolhido para ser seu assistente virtual"
-          }
-        ]
-      },
-      {
-        "role": "user",
-        "parts": [
-          {
-            "text": "Esqueci de informar que estamos trabalhando em uma lanchonete chamada Lucius Burguer."
-          }
-        ]
-      },
-      {
-        "role": "model",
-        "parts": [
-          {
-            "text": "Entendi! Lucius Burguer, que nome interessante! Vou guardar essa informação para te ajudar melhor. O que você gostaria que eu fizesse com relação ao Lucius Burguer?"
-          }
-        ]
-      },
-      {
-        "role": "user",
-        "parts": [
-          {
-            "text": "Extraia as seguintes informações do texto a seguir, retorne apenas como texto (Sem estilizações markdown) e sempre confirme se possui todas informações como esperado o, considerando que o pedido pode já estar pago. O texto é de um pedido do Lucius Burguer: \n\n(texto aqui)\n\nNome:\n\nTelefone: (n° de telefone) ID: (ID do pedido) (O telefone e o ID estão na mesma linha)\n\nEndereço: (quando for exibir o cep não deixe apenas os números, represente dessa forma CEP + numero)\n\nValor: (valor encontrado no texto somente em casos que o pedido nao foi pago ou 'PAGO' se o pedido estiver pago, se o pedido está pago o valor deve ser 'PAGO' sem mostrar o valor da compra, só será mostrado o valor da compra nos casos em que o pedido não foi pago)\n\nMétodo de pagamento:"
-          }
-        ]
-      },
-      {
-        "role": "model",
-        "parts": [
-          {
-            "text": "Nome: (nome encontrado no texto)\n\nTelefone: (número de telefone) ID: (ID do pedido)\n\nEndereço: (endereço encontrado no texto e (quando for exibir o cep não deixe apenas os números, represente dessa forma CEP + numero)\n\nValor: (valor encontrado no texto ou 'PAGO' se o pedido estiver pago)\n\nMétodo de pagamento: (valor encontrado no texto somente em casos que o pedido nao foi pago ou 'PAGO' se o pedido estiver pago)"
-          }
-        ]
-    }
-  ],
     generationConfig: {
-      maxOutputTokens: 100,
+      maxOutputTokens: 100000,
     },
   });
 
-  const result = await chat.sendMessage(msg);
-  const response = await result.response;
-  const text = response.text();
-  console.log(text);
-  return text
+  try {
+    const result = await chat.sendMessage(`Crie 10 perguntas de múltipla escolha sobre ${msg} com 5 alternativas cada. Cada pergunta deve ter apenas uma resposta correta. Retorne o resultado em formato JSON mas tenha consciencia que o resultado da sua resposta passara pela função JSON.parse então envie de acordo com os requisitos necessarios para ela nao dar erro, não retorne em codeblock, não irei visualizar, mande somente [{},] o array e os objetos que compõem o JSON
+    ,Certifique-se que alternativas: será sempre um array e nunca uma string e que as alternativas não estão dentro de arrays adicionais, o que tornara a estrutura inválida. O JSON espera que as alternativas sejam um array direto, não um array de arrays. Resposta nunca será uma string vazia. Se atente para nunca faltar aspas necessárias para manter a aplicação estavel.Caso seja perguntado de Star Wars, não de o exemplo abaixo sempre tente ser criativo. Você vai retornar como nesse exemplo:[
+      {
+        "enunciado": "Qual é o nome do planeta natal de Luke Skywalker?",
+        "alternativas": ["Tatooine", "Alderaan", "Naboo", "Coruscant", "Endor"],
+        "resposta": "Tatooine"
+      },
+      {
+        "enunciado": "Quem é o líder da rebelião contra o Império?",
+        "alternativas": ["Darth Vader", "Obi-Wan Kenobi", "Mon Mothma", "Han Solo", "Yoda"],
+        "resposta": "Mon Mothma"
+      },
+      {
+        "enunciado": "Qual é a arma característica de Han Solo?",
+        "alternativas": ["Sabre de luz", "Blaster", "Pistola", "Arco e flecha", "Espada"],
+        "resposta": "Blaster"
+      },
+      {
+        "enunciado": "Qual é o nome da nave espacial de Han Solo?",
+        "alternativas": ["Millennium Falcon", "X-Wing", "TIE Fighter", "Death Star", "Y-Wing"],
+        "resposta": "Millennium Falcon"
+      },
+      {
+        "enunciado": "Quem é o mestre Jedi que treina Luke Skywalker?",
+        "alternativas": ["Yoda", "Obi-Wan Kenobi", "Qui-Gon Jinn", "Mace Windu", "Palpatine"],
+        "resposta": "Obi-Wan Kenobi"
+      },
+      {
+        "enunciado": "Qual é o nome do planeta onde a base rebelde é localizada?",
+        "alternativas": ["Endor", "Hoth", "Yavin IV", "Dagobah", "Tatooine"],
+        "resposta": "Yavin IV"
+      },
+      {
+        "enunciado": "Qual é o nome do famoso caçador de recompensas que persegue Han Solo?",
+        "alternativas": ["Boba Fett", "Jabba the Hutt", "Lando Calrissian", "Greedo", "Wicket"],
+        "resposta": "Boba Fett"
+      },
+      {
+        "enunciado": "Qual é a principal arma do Império?",
+        "alternativas": ["Death Star", "TIE Fighter", "Super Star Destroyer", "AT-AT", "TIE Bomber"],
+        "resposta": "Death Star"
+      },
+      {
+        "enunciado": "Qual é o nome do planeta onde Luke Skywalker encontra Yoda?",
+        "alternativas": ["Dagobah", "Hoth", "Tatooine", "Endor", "Naboo"],
+        "resposta": "Dagobah"
+      },
+      {
+        "enunciado": "Qual é o nome do planeta onde a corrida de pods acontece?",
+        "alternativas": ["Tatooine", "Naboo", "Coruscant", "Alderaan", "Endor"],
+        "resposta": "Tatooine"
+      }
+    ]`);
+    const response = await result.response;
+    const text = await response.text();
+    const cleanedText = text.trim(); 
+    const json = JSON.parse(cleanedText);
+    return json
+  } catch (error) {
+    console.log(error)
+  }
 }
