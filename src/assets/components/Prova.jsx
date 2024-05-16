@@ -17,7 +17,7 @@ export default function Prova(props) {
     {step === 0 ? (
   <section className='flex flex-col gap-4 bg-white p-2 pb-8'>
     <div className='p-4 flex flex-col gap-4'>
-    <h1 className='text-3xl'>AI Quest</h1>
+    <h1 className='text-3xl'>AI Question</h1>
     <p>Tema: {props.tema}</p>
     </div>
    
