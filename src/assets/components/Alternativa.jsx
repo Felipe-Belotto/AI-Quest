@@ -32,7 +32,7 @@ export default function Alternativa(props) {
       {verifica ? (
         <Button
           className={"border text-[#9e3dff] bg-[#dcdcdc] flex gap-8 items-center shadow font-bold scale-105"}
-          key={props.index}
+          key={props.index + 100}
           disabled
         >
           <div className='bg-[#f5f5f5] rounded-full w-6 h-6 text-xs flex justify-center items-center border'>
@@ -43,7 +43,7 @@ export default function Alternativa(props) {
       ) : (
         <Button
           className={"border text-[#555555] bg-[#f5f5f5] flex gap-8 items-center"}
-          key={props.index}
+          key={props.index + 50}
           onClick={() => entregarAlternativa(props.pergunta, props.index)}
         >
           <div className='bg-[#f5f5f5] rounded-full w-6 h-6 text-xs flex justify-center items-center border'>

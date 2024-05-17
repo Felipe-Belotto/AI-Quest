@@ -49,7 +49,7 @@ export default function Prova(props) {
   <div className='flex flex-col gap-4 justify-between border-gray-300 bg-white border p-4 rounded-lg lg:w-[600px]' key={index}>
     <h2 className='text-xs text-[#828282] '>Questão {index + 1}</h2> 
     <h3 className='text-base '>{item.enunciado}</h3>
-    <div key={index + 50} className='flex flex-col gap-2' >
+    <div className='flex flex-col gap-2' >
       {item.alternativas.map((alternativa, altIndex) => (
         <Alternativa 
           texto={alternativa} 
@@ -85,7 +85,7 @@ export default function Prova(props) {
       <div className='flex flex-col gap-4 justify-between bg-white border-gray-300 border p-4 rounded-lg lg:w-[600px]' key={index}>
         <h1 className='text-xs text-[#828282] '>Questão {index + 1}</h1> 
         <h2 className='text-base'>{item.enunciado}</h2>
-        <div key={index + 50} className='flex flex-col gap-2' >
+        <div className='flex flex-col gap-2' >
           {item.alternativas.map((alternativa, altIndex) => (
             <AlternativaRevisao
               texto={alternativa} 

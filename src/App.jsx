@@ -47,7 +47,7 @@ function App() {
     {conectado ? 
     <div className='w-full lg:w-[400px] lg:h-[400px] border p-4 lg:p-8 flex flex-col justify-between rounded-lg border-gray-300 gap-4 print:hidden'>
     <Textarea rows={10} className=' lg:h-[250px]' label='Tema' value={mensagem} onChange={(e) => setMensagem(e.target.value)}  />
-    <Button  className='max-h-[40px]'{...botaoIniciar ? '' : "disabled"}  color='purple' onClick={() => {handleClick()}}> {botaoIniciar ? 'Iniciar' : 
+    <Button  className='max-h-[40px]'{...botaoIniciar ? '' : {disabled: true}}  color='purple' onClick={() => {handleClick()}}> {botaoIniciar ? 'Iniciar' : 
     
     <p className='flex gap-2 items-center justify-center'>Preparando ambiente <img className='h-4' src='/loading.gif' alt='loading icon'/></p> }</Button>
     </div>
