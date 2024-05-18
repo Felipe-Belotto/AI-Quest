@@ -46,6 +46,7 @@ function App() {
         setValidandoKey(false);
       } else {
         alert("Chave não reconhecida pelo sistemas google, verifique se ela foi escrita corretamente e tente novamente")
+        setValidandoKey(false);
       }
     }
     else{
