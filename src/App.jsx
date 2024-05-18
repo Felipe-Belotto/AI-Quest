@@ -42,7 +42,7 @@ function App() {
       <Prova lista={resposta} tema={tema} voltar={()=> {setResposta("")}}/>
       :
       <section className='flex flex-col gap-8 border p-4 rounded-lg border-gray-300 flex-wrap print:border-none print:h-auto'>
-      <h1 className='text-3xl font-bold text-center print:hidden'>AI Question</h1>
+      <h1 className='text-3xl font-bold text-center print:hidden text-gray-700'>AI Question</h1>
       <section className='flex gap-4 flex-wrap '>
     {conectado ? 
     <div className='w-full lg:w-[400px] lg:h-[400px] border p-4 lg:p-8 flex flex-col justify-between rounded-lg border-gray-300 gap-4 print:hidden'>
