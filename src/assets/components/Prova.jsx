@@ -73,10 +73,10 @@ export default function Prova(props) {
     <div className='p-4 flex items-start justify-between gap-2 border border-gray-300 bg-white lg:w-[600px]'>
       <div className='flex flex-col gap-2'>
       <p className='text-lg-'>Resultado</p>
-      <p className='text-xl' style={{color: pontuacao > 5 ? 'green' : 'red'}}>{pontuacao > 6 ? 'Parábens' : 'Reprovado'}</p>
+      <p className='text-xl' style={{color: pontuacao > 5 ? 'green' : 'red'}}>{pontuacao > 6 ? 'Aprovado' : 'Reprovado'}</p>
 
       </div>
-      <div className='flex gap-8 flex-col items-center text-xl bg-[#ffffff] border border-gray-300 p-4 rounded-2xl'>
+      <div className='flex  gap-2 flex-col items-center text-xl bg-[#ffffff] border border-gray-300 px-6 py-3 rounded-2xl'>
       <p className=' text-[#555555] text-sm'>Nota </p>
       <p style={{color: pontuacao > 5 ? 'green' : 'red'}} className='font-bold'> {pontuacao} </p>
       </div>
