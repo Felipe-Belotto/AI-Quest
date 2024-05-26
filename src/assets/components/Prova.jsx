@@ -37,14 +37,15 @@ export default function Prova(props) {
 
   return (
     <>
+    <section className='flex flex-col gap-4  p-2 pb-8  lg:w-[600px]'>
+    <header className='p-4 flex flex-col gap-4 bg-white border shadow'>
+    <h1 className='text-2xl'>AI Question</h1>
+    <p>Tema: {props.tema == "" || props.tema == props.tema || props.tema == undefined ? "Ensino fudamental e médio" : props.tema}</p>
+    </header>
+    
     {step === 0 ? (
       /* Prova  */
-  <section className='flex flex-col gap-4  p-2 pb-8'>
-
-    <header className='p-4 flex flex-col gap-4 bg-white border shadow'>
-    <h1 className='text-3xl'>AI Question</h1>
-    <p>Tema: {props.tema}</p>
-    </header>
+ <>
    
 {props.lista.map((item, index) => (
   <div className='flex flex-col gap-4 justify-between border-gray-300 bg-white border p-4 rounded-lg lg:w-[600px]' key={index}>
@@ -63,15 +64,10 @@ export default function Prova(props) {
   </div>
 ))}
     <Button className='bg-[#9e3dff]' onClick={()=> validarRespostas()}>Confirmar respostas</Button>
-    </section>
+    </>
     ) :
     /* Prova corrigida */
-     <section className='flex flex-col gap-4  p-2 pb-8  lg:w-[600px]'>
-      
-     <header className='p-4 flex flex-col gap-4 bg-white border shadow'>
-    <h1 className='text-3xl'>AI Question</h1>
-    <p>Tema: {props.tema}</p>
-    </header>
+     <>
 
     <div className='p-4 flex justify-between gap-4 bg-white border shadow'>
     <div className='flex flex-col gap-2'>
@@ -94,6 +90,7 @@ export default function Prova(props) {
               texto={alternativa} 
               index={altIndex}  
               pergunta={index}  
+              enunciado={item.enunciado}
               alternativaCorreta={item.resposta}
             />
           ))}
@@ -101,8 +98,9 @@ export default function Prova(props) {
       </div>
     ))}
         <Button className='bg-[#1e0932]' onClick={()=> window.location.reload()}>Voltar ao inicio</Button>
-        </section>
+     </>
   }
+  </section>
     </>
   );
 }

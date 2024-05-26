@@ -5,6 +5,7 @@ import Prova from './assets/components/Prova';
 import gerarProva from './assets/functions/gerarProva';
 import MenuStart from './assets/components/MenuStart';
 import StartPage from './assets/components/StartPage';
+import Footer from './assets/components/Footer';
 
 function App() {
   const [mensagem, setMensagem] = useState("");
@@ -42,7 +43,8 @@ function App() {
       const propsMenu = {botaoIniciar,mensagem,erroAPI,setMensagem,tema,setResposta,handleClick}
 
   return (
-    <main className='w-[100vw] flex justify-center'>
+    <>
+    <main className='w-[100vw] min-h-[95vh] flex justify-center items-center flex-1'>
     {
       resposta != "" ? 
       <Prova lista={resposta} tema={tema} voltar={()=> {setResposta("")}}/>
@@ -50,9 +52,11 @@ function App() {
       startPage ?
       <StartPage start={handleStartPage}/> :
       <MenuStart {...propsMenu}/>
-    
     }
     </main>
+
+    <Footer/>
+    </>
 
    
   );
