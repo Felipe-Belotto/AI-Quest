@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export default async function gerarProva(msg) {
 
-  const key = import.meta.env.VITE_GEMINI_KEY;
+  const key = import.meta.env.VITE_GEMINI;
 
   const genAI = new GoogleGenerativeAI(key);
 /*   const model = genAI.getGenerativeModel({ model: "gemini-pro" }); */
