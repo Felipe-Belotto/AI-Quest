@@ -40,10 +40,11 @@ export default function Prova(props) {
     {step === 0 ? (
       /* Prova  */
   <section className='flex flex-col gap-4  p-2 pb-8'>
-    <div className='p-4 flex flex-col gap-4'>
+
+    <header className='p-4 flex flex-col gap-4 bg-white border shadow'>
     <h1 className='text-3xl'>AI Question</h1>
     <p>Tema: {props.tema}</p>
-    </div>
+    </header>
    
 {props.lista.map((item, index) => (
   <div className='flex flex-col gap-4 justify-between border-gray-300 bg-white border p-4 rounded-lg lg:w-[600px]' key={index}>
@@ -66,21 +67,23 @@ export default function Prova(props) {
     ) :
     /* Prova corrigida */
      <section className='flex flex-col gap-4  p-2 pb-8  lg:w-[600px]'>
-      <div className='p-4 flex flex-col gap-4'>
+      
+     <header className='p-4 flex flex-col gap-4 bg-white border shadow'>
     <h1 className='text-3xl'>AI Question</h1>
-    <p>Tema: {props.tema} (Revisão)</p>
-    </div>
-    <div className='p-4 flex items-start justify-between gap-2 border border-gray-300 bg-white lg:w-[600px]'>
-      <div className='flex flex-col gap-2'>
-      <p className='text-lg-'>Resultado</p>
-      <p className='text-xl' style={{color: pontuacao > 5 ? 'green' : 'red'}}>{pontuacao > 6 ? 'Aprovado' : 'Reprovado'}</p>
+    <p>Tema: {props.tema}</p>
+    </header>
 
+    <div className='p-4 flex justify-between gap-4 bg-white border shadow'>
+    <div className='flex flex-col gap-2'>
+      <p className='text-lg'>Resultado</p>
+      <p className='text-xl' style={{color: pontuacao > 5 ? 'green' : 'red'}}>{pontuacao > 6 ? 'Aprovado' : 'Reprovado'}</p>
       </div>
-      <div className='flex  gap-2 flex-col items-center text-xl bg-[#ffffff] border border-gray-300 px-6 py-3 rounded-2xl'>
+      <div className='flex  gap-2 flex-col items-center text-xl bg-[#ffffff] border border-gray-300 px-6 py-3 rounded-2xl max-w-[100px]'>
       <p className=' text-[#555555] text-sm'>Nota </p>
       <p style={{color: pontuacao > 5 ? 'green' : 'red'}} className='font-bold'> {pontuacao} </p>
       </div>
     </div>
+
     {props.lista.map((item, index) => (
       <div className='flex flex-col gap-4 justify-between bg-white border-gray-300 border p-4 rounded-lg lg:w-[600px]' key={index}>
         <h1 className='text-xs text-[#828282] '>Questão {index + 1}</h1> 

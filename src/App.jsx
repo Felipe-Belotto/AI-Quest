@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Prova from './assets/components/Prova';
 import gerarProva from './assets/functions/gerarProva';
 import MenuStart from './assets/components/MenuStart';
+import StartPage from './assets/components/StartPage';
 
 function App() {
   const [mensagem, setMensagem] = useState("");
@@ -11,6 +12,7 @@ function App() {
   const [tema, setTema] = useState("");
   const [botaoIniciar, setBotaoIniciar] = useState(true);
   const [erroAPI, setErroAPI] = useState(false);
+  const [startPage, setStartPage] = useState(true);
 
   
 
@@ -33,16 +35,22 @@ function App() {
     }
   }
 
-      <Prova lista={resposta} tema={tema} voltar={()=> {setResposta("")}}/>
+  const handleStartPage = () => {
+    setStartPage(false);
+  }
+
       const propsMenu = {botaoIniciar,mensagem,erroAPI,setMensagem,tema,setResposta,handleClick}
 
   return (
-    <main>
+    <main className='w-[100vw] flex justify-center'>
     {
       resposta != "" ? 
       <Prova lista={resposta} tema={tema} voltar={()=> {setResposta("")}}/>
       :
+      startPage ?
+      <StartPage start={handleStartPage}/> :
       <MenuStart {...propsMenu}/>
+    
     }
     </main>
 

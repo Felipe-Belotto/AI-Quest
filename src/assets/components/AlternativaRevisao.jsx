@@ -2,6 +2,7 @@ import { Button } from '@material-tailwind/react';
 import React, { useContext, useEffect, useState } from 'react';
 import { ProvaContext } from '../context/ProvaContext';
 import transformaNumero from '../functions/auxiliares';
+import { motion } from "framer-motion"
 
 export default function AlternativaRevisao(props) {
   const { respostasSelecionadas, setRespostasCorretas, respostasCorretas } = useContext(ProvaContext);
@@ -33,6 +34,7 @@ export default function AlternativaRevisao(props) {
           </Button>
         ) : (
           // Botão caso seja a alternativa incorreta
+       
           <Button
             className={"border text-[#ffffff] bg-[#ff5e5e] flex gap-8 items-center"}
             key={props.index}
@@ -42,6 +44,7 @@ export default function AlternativaRevisao(props) {
             </div>
             {props.texto}
           </Button>
+  
         )
       ) : (
         // Botão caso não seja a alternativa selecionada
