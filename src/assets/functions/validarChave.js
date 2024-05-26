@@ -1,6 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export default async function validarChave(key) {
+export default async function validarChave() {
+
+  const key = import.meta.env.VITE_GEMINI_KEY;
 
   const genAI = new GoogleGenerativeAI(key);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
